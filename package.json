@@ -21,7 +21,7 @@
     "nodemon",
     "ts-node"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
