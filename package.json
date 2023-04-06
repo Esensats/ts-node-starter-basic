@@ -1,7 +1,8 @@
 {
-  "name": "first-project",
+  "name": "ts-node-starter-basic",
   "version": "1.0.0",
-  "description": "",
+  "author": "Esensats <esensats@gmail.com>",
+  "description": "Template for a basic Node application that has Typescript, ESLint and Prettier",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,9 +13,14 @@
     "format": "prettier --write ."
   },
   "keywords": [
-    "first-project"
+    "node",
+    "nodejs",
+    "typescript",
+    "eslint",
+    "prettier",
+    "nodemon",
+    "ts-node"
   ],
-  "author": "Esensats",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",

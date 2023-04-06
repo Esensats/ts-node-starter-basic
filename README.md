@@ -1,5 +1,4 @@
-This is my first vanilla Node project (have experience in Vue & React)
-that I'm creating from scratch. I'm learning backend
+Template for a basic Node application that has Typescript, ESLint and Prettier.
 
 Install modules:
 
@@ -23,4 +22,16 @@ Run the build:
 
 ```shell
 npm run start
+```
+
+Lint the project:
+
+```shell
+npm run lint
+```
+
+Reformat the project:
+
+```shell
+npm run format
 ```
