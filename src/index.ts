@@ -1,10 +1,12 @@
 import express from 'express'
-import * as process from 'process'
+import ip from 'ip'
+// import mongoose from 'mongoose'
 
 const app = express()
 app.use(express.json())
-
 const port = process.env.API_PORT || 3000
+
+// mongoose.connect('mongodb://127.0.0.1')
 
 app.get('/', (req, res) => {
   res.send('Hello world!')
@@ -24,13 +26,12 @@ app.get('/articles', (req, res) => {
   })
 })
 
-const server = app.listen(port, () => {
-  console.log(`Server running at http://127.0.0.1:${port}/`)
-})
+app.listen(port, () => {
+  console.log(`
+Server is running
 
-app.on('exit', () => {
-  server.close((err) => {
-    console.log('Server closed.')
-    process.exit(err ? 1 : 0)
-  })
+Host:  http://${ip.address()}:${port}/
+
+Local: http://127.0.0.1:${port}/
+`)
 })
