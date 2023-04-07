@@ -1,4 +1,4 @@
-Template for a basic Node application that has Typescript, ESLint and Prettier.
+Template for a basic Node application that has Express, Typescript, ESLint and Prettier.
 
 Install modules:
 

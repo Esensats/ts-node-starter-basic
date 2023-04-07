@@ -2,15 +2,33 @@
   "name": "ts-node-starter-basic",
   "version": "1.0.0",
   "author": "Esensats <esensats@gmail.com>",
-  "description": "Template for a basic Node application that has Typescript, ESLint and Prettier",
+  "description": "Template for a basic Node application that has Express, Typescript, ESLint and Prettier",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
-    "build": "rimraf ./build && tsc",
-    "start": "node ./dist/index.js",
+    "build": "rimraf ./dist && tsc",
+    "start": "node -r dotenv/config ./dist/index.js",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.7",
+    "rimraf": "^4.4.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
   },
   "keywords": [
     "node",
@@ -22,21 +40,5 @@
     "ts-node",
     "express"
   ],
-  "license": "MIT",
-  "devDependencies": {
-    "@types/express": "^4.17.17",
-    "@types/node": "^18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "eslint": "^8.37.0",
-    "eslint-config-prettier": "^8.8.0",
-    "nodemon": "^2.0.22",
-    "prettier": "2.8.7",
-    "rimraf": "^4.4.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+  "license": "MIT"
 }
