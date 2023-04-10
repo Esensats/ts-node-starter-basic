@@ -1,5 +1,4 @@
 {
-  "watch": ["src"],
   "ext": "ts,js,cts,cjs,mts,mjs,json,html,css,scss",
   "ignore": [],
   "exec": "ts-node -r dotenv/config --esm ./src/index.ts"
