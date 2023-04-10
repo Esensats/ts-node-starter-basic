@@ -18,18 +18,26 @@ const userSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User', userSchema); */
 
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document } from 'mongoose'
+import { IRole } from './role.js'
 
-interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
+export interface IUser extends Document {
+  name: string
+  email: string
+  password: string
+  roles: IRole[]
 }
 
 const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
-  password: { type: String, required: true }
-});
+  password: { type: String, required: true },
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Role',
+    },
+  ],
+})
 
-export const User = model<IUser>('User', userSchema);
+export const User = model<IUser>('User', userSchema)
