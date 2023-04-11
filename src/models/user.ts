@@ -18,19 +18,33 @@ const userSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User', userSchema); */
 
-import { Schema, model, Document } from 'mongoose'
-import { IRole } from './role.js'
+import { Schema, model, Document, Model } from 'mongoose'
+import bcrypt from 'bcryptjs'
+// import { IRole } from './role.js'
 
 export interface IUser extends Document {
   name: string
   email: string
   password: string
-  roles: IRole[]
+  roles: Schema.Types.ObjectId[]
+  created: Date
 }
 
-const userSchema = new Schema({
+interface IUserMethods {
+  comparePassword(password: string): boolean
+}
+
+type UserModel = Model<IUser, object, IUserMethods>
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
   password: { type: String, required: true },
   roles: [
     {
@@ -38,6 +52,15 @@ const userSchema = new Schema({
       ref: 'Role',
     },
   ],
+  created: { type: Date, default: Date.now },
 })
 
-export const User = model<IUser>('User', userSchema)
+userSchema.method(
+  'comparePassword',
+  function comparePassword(password: string) {
+    return bcrypt.compareSync(password, this.password)
+  }
+)
+
+export const User = model<IUser, UserModel>('User', userSchema)
+

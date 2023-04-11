@@ -4,6 +4,8 @@ import mongoose from 'mongoose'
 import { userRouter } from './routes/userRouter.js'
 import { Role, ROLES } from './models/role.js'
 import { roleRouter } from './routes/roleRouter.js'
+import { errorHandler } from './middlewares/errorHandler.js'
+import { authRouter } from './routes/authRouter.js'
 // import path, { dirname } from 'path';
 // import { fileURLToPath } from 'url';
 
@@ -13,6 +15,8 @@ app.use(express.json())
 // Use User router
 app.use('/api/v1', userRouter)
 app.use('/api/v1', roleRouter)
+app.use('/api/v1/auth', authRouter)
+app.use(errorHandler)
 
 // const __dirname = path.dirname(new URL(import.meta.url).pathname);
 // const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -61,3 +65,4 @@ Host:  http://${ip.address()}:${port}/
 Local: http://127.0.0.1:${port}/
 `)
 })
+
