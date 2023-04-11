@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 export interface IRole {
-  name: string
+  name: 'gamer' | 'developer' | 'admin'
 }
 
 const roleSchema = new mongoose.Schema({
@@ -9,3 +9,5 @@ const roleSchema = new mongoose.Schema({
 })
 
 export const Role = mongoose.model<IRole>('Role', roleSchema)
+
+export const ROLES = ['gamer', 'developer', 'admin']

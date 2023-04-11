@@ -13,16 +13,6 @@ userRouter.post('/users', async (req, res) => {
     res.status(400).send(err)
   }
 })
-userRouter.put('/users/:id', async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    })
-    if (user) res.status(200).send(user.toJSON())
-  } catch (err) {
-    res.status(400).send(err)
-  }
-})
 
 // Get all users
 userRouter.get('/users', async (req, res) => {
@@ -31,6 +21,17 @@ userRouter.get('/users', async (req, res) => {
     res.send(users)
   } catch (err) {
     res.status(500).send(err)
+  }
+})
+
+userRouter.put('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    })
+    if (user) res.status(200).send(user.toJSON())
+  } catch (err) {
+    res.status(400).send(err)
   }
 })
 userRouter.delete('/users/:id', async (req, res) => {
