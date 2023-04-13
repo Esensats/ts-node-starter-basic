@@ -6,11 +6,13 @@ import { Role, ROLES } from './models/role.js'
 import { roleRouter } from './routes/roleRouter.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 import { authRouter } from './routes/authRouter.js'
+import cors from 'cors'
 // import path, { dirname } from 'path';
 // import { fileURLToPath } from 'url';
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 // Use User router
 app.use('/api/v1', userRouter)
@@ -65,4 +67,3 @@ Host:  http://${ip.address()}:${port}/
 Local: http://127.0.0.1:${port}/
 `)
 })
-

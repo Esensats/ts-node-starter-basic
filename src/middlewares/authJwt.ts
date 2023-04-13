@@ -7,21 +7,26 @@ import { Request, RequestHandler } from 'express'
 import { ObjectId, Schema } from 'mongoose'
 
 export const verifyToken: RequestHandler = (req, res, next) => {
-  const token = (req.headers['authorization'] as string) || ''
+  const tokenWithPrefix = (req.headers['authorization'] as string) || ''
 
-  if (!token) {
-    return res.status(403).send({ message: 'No token provided!' })
+  if (!tokenWithPrefix) {
+    return res.status(401).send({ message: 'No token provided!' })
   }
+  if (!tokenWithPrefix.startsWith('Bearer ')) {
+    return res.status(401).send({ message: 'Incorrect token!' })
+  }
+  const token = tokenWithPrefix.replace('Bearer ', '')
   interface UserJwtPayload extends jwt.JwtPayload {
-    userId: ObjectId
+    uid: ObjectId
   }
 
   jwt.verify(token, config.secretKey, (err, decoded) => {
     if (err) {
       return res.status(401).send({ message: 'Unauthorized!' })
     }
-    const { userId } = decoded as UserJwtPayload
-    Object.assign(req, { userId })
+    const { uid } = decoded as UserJwtPayload
+    console.log({ decoded })
+    Object.assign(req, { userId: uid })
     next()
   })
 }
@@ -96,4 +101,3 @@ export const isModerator: RequestHandler = (req, res, next) => {
     )
   })
 } */
-

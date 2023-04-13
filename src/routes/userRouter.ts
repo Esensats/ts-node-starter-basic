@@ -29,11 +29,16 @@ userRouter.post('/users', async (req, res) => {
 userRouter.get('/users', verifyToken, async (req, res) => {
   try {
     await User.find()
-      .populate('roles')
+      .select({ name: 1, id: 1, email: 1, roles: 1, created: 1 })
+      .populate('roles', 'name')
+      .lean()
       .then((users) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
-        res.json(users)
+        res.send(users)
+      })
+      .catch((error) => {
+        console.error(error)
       })
   } catch (err) {
     res.status(500).send(err)
@@ -61,4 +66,3 @@ userRouter.delete('/users/:id', async (req, res) => {
 })
 
 export { userRouter }
-
